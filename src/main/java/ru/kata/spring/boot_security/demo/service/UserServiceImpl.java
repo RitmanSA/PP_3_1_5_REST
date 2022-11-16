@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -49,15 +48,20 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User getByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findById(Long.valueOf(username));
+        User user = userDao.findByEmail(username);
         List<Role> list = user.getRoleList();
         Set<SimpleGrantedAuthority> set = list.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toSet());
-        return new org.springframework.security.core.userdetails.User(user.getId().toString(), user.getPass(), set);
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPass(), set);
     }
 }

@@ -36,6 +36,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public User findByEmail(String email) {
+        return em.createQuery("select users FROM User users where users.email = :email", User.class)
+                .setParameter("email", email)
+                .getSingleResult();
+    }
+
+    @Override
     public List<User> getAllUsers() {
         return em.createQuery("select users from User users", User.class).getResultList();
     }

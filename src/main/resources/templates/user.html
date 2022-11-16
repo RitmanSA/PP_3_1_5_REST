@@ -4,8 +4,15 @@
     <title>Spring Security Example</title>
 </head>
 <body>
-<h1> Hello, <span th:text="${username}">smth</span> welcome!</h1>
-
-
+    <h1> Hello, <span th:text="${user.firstName}">username</span>, welcome!</h1>
+    <p> Your id: <span th:text="${user.id}">id</span></p>
+    <p> Your name: <span th:text="${user.firstName}">name</span></p>
+    <p> Your surname: <span th:text="${user.lastName}">lastname</span></p>
+    <p> Your email: <span th:text="${user.email}">email</span></p>
+    <p> Your roles: </p>
+    <th:block th:each="role : ${user.roleList}">
+        <p th:text="${role.getRole()}">role</p>
+    </th:block>
+    <a th:href="@{/logout}" th:text="logout"></a>
 </body>
 </html>
