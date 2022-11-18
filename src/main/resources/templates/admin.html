@@ -6,6 +6,26 @@
 </head>
 <body>
     <h1>Welcome to admin page</h1>
+
+    <table th:border="5">
+        <tr>
+            <td th:text="id"></td>
+            <td th:text="first_name"></td>
+            <td th:text="last_name"></td>
+            <td th:text="email"></td>
+        </tr>
+        <th:block th:each="msg : ${users}">
+            <tr>
+                <td th:text="${msg.id}"></td>
+                <td th:text="${msg.firstName}"></td>
+                <td th:text="${msg.lastName}"></td>
+                <td th:text="${msg.email}"></td>
+                <td th:each="role : ${msg.roleList.toArray()}" th:text="${role.getRole()}"></td>
+            </tr>
+        </th:block>
+    </table>
+    <a th:href="@{/admin/add}" th:text="add"></a>
+    <br>
     <a th:href="@{/logout}" th:text="logout"></a>
 
 </body>

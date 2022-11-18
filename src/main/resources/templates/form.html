@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">>
+<head>
+  <meta charset="UTF-8">
+  <title>user</title>
+</head>
+<body>
+
+<form action="#" th:method="POST" th:action = "@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}">
+  <label for="name">Enter name:</label>
+  <input type="text"   th:object="${user}" th:field="*{firstName}" id="name"/>
+  <br/>
+  <label for ="lastName">Enter Lastname:</label>
+  <input type="text"  th:object="${user}" th:field="*{lastName}" id="lastName"/>
+  <br/>
+  <label for="email">Enter email:</label>
+  <input type="text"   th:object="${user}" th:field="*{email}" id="email"/>
+  <label for="role">Select role:</label>
+  <select multiple th:field="${rolesArray}" id = "role">
+    <option th:each="singleRole : ${rolesList}" th:value="${singleRole.role}"
+            th:text = "${singleRole.getRole()}"></option>
+  </select>
+  <input type="submit" value="confirm"/>
+</form>
+
+</body>
+</html>

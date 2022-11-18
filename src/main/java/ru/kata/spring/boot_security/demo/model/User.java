@@ -82,6 +82,14 @@ public class User {
         this.email = email;
     }
 
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
+    }
+
     public String getPass() {
         return pass;
     }
@@ -90,11 +98,7 @@ public class User {
         this.pass = pass;
     }
 
-    public List<Role> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
+    public void addRole(Role role) {
+        this.roleList.add(role);
     }
 }

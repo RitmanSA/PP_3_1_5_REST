@@ -12,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "role")
-public class Role {
+@Entity
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -32,11 +34,11 @@ public class Role {
     )
     private List<User> userList = new ArrayList<>();
 
-    public Long id() {
+    public Long getId() {
         return id;
     }
 
-    public void setRoleId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,7 +54,8 @@ public class Role {
         return userList;
     }
 
-    public void setUserSet(List<User> userList) {
+    public void setUserList(List<User> userList) {
         this.userList = userList;
     }
+
 }
