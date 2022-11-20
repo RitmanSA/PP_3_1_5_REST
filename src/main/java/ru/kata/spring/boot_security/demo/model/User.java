@@ -1,5 +1,7 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -95,14 +97,8 @@ public class User {
     }
 
     public void setPass(String pass) {
-        this.pass = pass;
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.pass = encoder.encode(pass);
     }
 
-    public void addRole(Role role) {
-        this.roleList.add(role);
-    }
-
-    public void addRole(Role[] role) {
-
-    }
 }

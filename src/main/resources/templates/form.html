@@ -15,13 +15,17 @@
   <br/>
   <label for="email">Enter email:</label>
   <input type="text"   th:object="${user}" th:field="*{email}" id="email"/>
+  <br>
+  <label for="password">Enter password</label>
+  <input type ="password" th:object="${user}" th:field="*{pass}" id="password">
+  <br>
+  <br>
   <label for="role">Select role:</label>
-  <label>
   <select multiple size = 2 th:name="rolesArray"  id = "role">
     <option th:each="singleRole : ${rolesArray}" th:value="${singleRole}"
             th:text = "${singleRole}"></option>
   </select>
-  </label>
+  <br>
   <input type="submit" value="confirm"/>
 </form>
 

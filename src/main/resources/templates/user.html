@@ -11,7 +11,7 @@
     <p> Your email: <span th:text="${user.email}">email</span></p>
     <p> Your roles: </p>
     <th:block th:each="role : ${user.roleList}">
-        <p th:text="${role.getRole()}">role</p>
+        <p th:text="${role.getRoleName()}">role</p>
     </th:block>
     <a th:href="@{/logout}" th:text="logout"></a>
 </body>
