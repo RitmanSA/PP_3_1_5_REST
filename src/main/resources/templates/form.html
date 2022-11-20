@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form action="#" th:method="POST" th:action = "@{/admin/update/{id}(id=${user.getId()})}" th:object="${user}">
+<form action="#" th:method="POST" th:action = "@{/admin/update/{id}(id=${user.getId()})}">
   <label for="name">Enter name:</label>
   <input type="text"   th:object="${user}" th:field="*{firstName}" id="name"/>
   <br/>
@@ -16,10 +16,12 @@
   <label for="email">Enter email:</label>
   <input type="text"   th:object="${user}" th:field="*{email}" id="email"/>
   <label for="role">Select role:</label>
-  <select multiple th:field="${rolesArray}" id = "role">
-    <option th:each="singleRole : ${rolesList}" th:value="${singleRole.role}"
-            th:text = "${singleRole.getRole()}"></option>
+  <label>
+  <select multiple size = 2 th:name="rolesArray"  id = "role">
+    <option th:each="singleRole : ${rolesArray}" th:value="${singleRole}"
+            th:text = "${singleRole}"></option>
   </select>
+  </label>
   <input type="submit" value="confirm"/>
 </form>
 

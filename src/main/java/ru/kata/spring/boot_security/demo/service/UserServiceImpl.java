@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findByEmail(username);
         List<Role> list = user.getRoleList();
-        Set<SimpleGrantedAuthority> set = list.stream().map(r -> new SimpleGrantedAuthority(r.getRole())).collect(Collectors.toSet());
+        Set<SimpleGrantedAuthority> set = list.stream().map(r -> new SimpleGrantedAuthority(r.getRoleName())).collect(Collectors.toSet());
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPass(), set);
     }
 }

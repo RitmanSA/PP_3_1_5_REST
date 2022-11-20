@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class TestController {
@@ -45,14 +46,14 @@ public class TestController {
 
     @GetMapping("/admin/add")
     public String newEmptyUser(Model model) {
-        model.addAttribute("rolesList", roleService.getAllRoles());
+        model.addAttribute("rolesArray", roleService.getAllRoles().stream().map(Role::getRoleName).toArray());
         model.addAttribute("user", new User());
-        model.addAttribute("rolesArray", new String[2]);
         return "form";
     }
 
     @PostMapping("/admin/update")
-    public String newUser(@ModelAttribute("user") User user, @RequestParam(name = "rolesArray") String[] rolesArray) {
+    public String newUser(@ModelAttribute("user") User user, @RequestParam("rolesArray") String[] rolesArray) {
+        user.setRoleList(Arrays.stream(rolesArray).map(roleService::getByRole).collect(Collectors.toList()));
         userService.addUser(user);
         return "redirect:/admin";
     }

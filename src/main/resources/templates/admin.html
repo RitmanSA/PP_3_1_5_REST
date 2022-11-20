@@ -20,7 +20,7 @@
                 <td th:text="${msg.firstName}"></td>
                 <td th:text="${msg.lastName}"></td>
                 <td th:text="${msg.email}"></td>
-                <td th:each="role : ${msg.roleList.toArray()}" th:text="${role.getRole()}"></td>
+                <td th:each="role : ${msg.roleList.toArray()}" th:text="${role.getRoleName()}"></td>
             </tr>
         </th:block>
     </table>

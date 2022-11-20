@@ -101,4 +101,8 @@ public class User {
     public void addRole(Role role) {
         this.roleList.add(role);
     }
+
+    public void addRole(Role[] role) {
+
+    }
 }

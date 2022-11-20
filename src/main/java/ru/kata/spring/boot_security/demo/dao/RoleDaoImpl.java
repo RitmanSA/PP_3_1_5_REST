@@ -18,6 +18,13 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
+    public Role getByRole(String role) {
+        return em.createQuery("select role from Role role where role.roleName = :roleName", Role.class)
+                .setParameter("roleName", role)
+                .getSingleResult();
+    }
+
+    @Override
     public Role getById(Long id) {
         return em.find(Role.class, id);
     }
