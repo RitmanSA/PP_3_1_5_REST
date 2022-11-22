@@ -13,6 +13,7 @@
             <td th:text="first_name"></td>
             <td th:text="last_name"></td>
             <td th:text="email"></td>
+            <td th:text="roles"></td>
         </tr>
         <th:block th:each="msg : ${users}">
             <tr>
@@ -20,9 +21,23 @@
                 <td th:text="${msg.firstName}"></td>
                 <td th:text="${msg.lastName}"></td>
                 <td th:text="${msg.email}"></td>
-                <td th:each="role : ${msg.roleList.toArray()}" th:text="${role.getRoleName()}"></td>
+                <td>
+                    <th:block th:each="role : ${msg.roleList.toArray()}">
+                        <p th:text="${role.getRoleName()}"></p>
+                    </th:block>
+                <td>
+                    <form th:method="DELETE" th:action="@{/admin/delete/{id}(id=${msg.getId()})}">
+                        <input type="submit" th:value="delete">
+                    </form>
+                </td>
+                <td>
+                    <form th:method="GET" th:action="@{/admin/update/{id}(id=${msg.getId()})}">
+                        <input type="submit" th:value="update">
+                    </form>
+                </td>
             </tr>
         </th:block>
+
     </table>
     <a th:href="@{/admin/add}" th:text="add"></a>
     <br>

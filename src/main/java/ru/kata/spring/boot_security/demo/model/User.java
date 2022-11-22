@@ -29,10 +29,11 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH}
+            ,fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role"
             , joinColumns = @JoinColumn(name = "user_id")
@@ -99,6 +100,10 @@ public class User {
     public void setPass(String pass) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.pass = encoder.encode(pass);
+    }
+
+    public void setEncodedPass(String pass) {
+        this.pass = pass;
     }
 
 }
