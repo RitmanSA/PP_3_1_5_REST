@@ -36,8 +36,10 @@ public class TestController {
     }
 
     @GetMapping("/admin")
-    public String adminPage(Model model) {
+    public String adminPage(Model model, Principal principal) {
+        User admin = userService.getByEmail(principal.getName());
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("admin", admin);
         return "admin";
     }
 
