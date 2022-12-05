@@ -32,6 +32,9 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+    @Column(name = "age")
+    private Integer age;
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH}
             ,fetch = FetchType.EAGER)
     @JoinTable(
@@ -100,6 +103,14 @@ public class User {
     public void setPass(String pass) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         this.pass = encoder.encode(pass);
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public void setEncodedPass(String pass) {

@@ -59,6 +59,7 @@
                   <td><h6>First name</h6></td>
                   <td><h6>Last name</h6></td>
                   <td><h6>Email</h6></td>
+                  <td><h6>Age</h6></td>
                   <td><h6>Role</h6></td>
                   <td><h6>Delete</h6></td>
                   <td><h6>Edit</h6></td>
@@ -71,6 +72,7 @@
                     <td th:text="${user.firstName}">firstname1</td>
                     <td th:text="${user.lastName}">lastname1</td>
                     <td th:text="${user.email}">email1</td>
+                    <td th:text="${user.age}">email1</td>
                     <td>
                       <th:block th:each="role : ${user.roleList.toArray()}">
                         <span th:text="${role.getRoleName()}">role</span>
@@ -92,23 +94,27 @@
                             <form action="#" th:id="'form-delete'+${user.id}" class="text-center" th:method="Delete" th:action = "@{/admin/delete/{id}(id=${user.id})}">
 
                               <div style="margin-left: 25%; margin-right: 25%">
-                                <label for="idEdit" class="form-label fw-bold mb-0">ID</label>
+                                <label for="idDelete" class="form-label fw-bold mb-0">ID</label>
                                 <input class="form-control" type="text" th:value="${user.id}" id="idDelete" disabled/>
                               </div>
                               <div style="margin-left: 25%; margin-right: 25%">
-                                <label for="nameEdit" class="form-label fw-bold mb-0 mt-3">Name</label>
+                                <label for="nameDelete" class="form-label fw-bold mb-0 mt-3">Name</label>
                                 <input class="form-control" type="text" th:value="${user.firstName}" id="nameDelete" disabled/>
                               </div>
                               <div style="margin-left: 25%; margin-right: 25%">
-                                <label for="lastNameEdit" class="form-label fw-bold mb-0 mt-3">Last name</label>
+                                <label for="lastNameDelete" class="form-label fw-bold mb-0 mt-3">Last name</label>
                                 <input class="form-control" type="text" th:value="${user.lastName}" id="lastNameDelete" disabled/>
                               </div>
                               <div style="margin-left: 25%; margin-right: 25%">
-                                <label for="emailEdit" class="form-label fw-bold mb-0 mt-3">Email</label>
+                                <label for="emailDelete" class="form-label fw-bold mb-0 mt-3">Email</label>
                                 <input class="form-control" type="text" th:value="${user.email}" id="emailDelete" disabled/>
                               </div>
                               <div style="margin-left: 25%; margin-right: 25%">
-                                <label for="roleEdit" class="form-label fw-bold mb-0 mt-3">Role</label>
+                                <label for="ageDelete" class="form-label fw-bold mb-0 mt-3">Age</label>
+                                <input class="form-control" type="number" th:value="${user.age}" id="ageDelete" disabled/>
+                              </div>
+                              <div style="margin-left: 25%; margin-right: 25%">
+                                <label for="roleDelete" class="form-label fw-bold mb-0 mt-3">Role</label>
                                 <select class="form-control" multiple size = 2 th:name="rolesArray"  id = "roleDelete" disabled>
                                   <option th:each="singleRole : ${rolesArray}" th:value="${singleRole}"
                                           th:text = "${singleRole}">admin</option>
@@ -156,6 +162,10 @@
                                 <div style="margin-left: 25%; margin-right: 25%">
                                 <label for="emailEdit" class="form-label fw-bold mb-0 mt-3">Email</label>
                                 <input class="form-control" type="text" th:name="email" th:value="${user.email}" id="emailEdit"/>
+                                </div>
+                                <div style="margin-left: 25%; margin-right: 25%">
+                                  <label for="ageEdit" class="form-label fw-bold mb-0 mt-3">Age</label>
+                                  <input class="form-control" type="number" th:name="age" th:value="${user.age}" id="ageEdit"/>
                                 </div>
                                 <div style="margin-left: 25%; margin-right: 25%">
                                 <label for="passwordEdit" class="form-label fw-bold mb-0 mt-3">Password</label>
@@ -206,6 +216,10 @@
                 <input class="form-control" type="text" th:object="${newUser}" th:field="*{email}" id="email"/>
                 </div>
                 <div style="margin-left: 35%; margin-right: 35%">
+                  <label for="age" class="form-label fw-bold mb-0 mt-3">Age</label>
+                  <input class="form-control" type="number" th:object="${newUser}" th:field="*{age}" id="age"/>
+                </div>
+                <div style="margin-left: 35%; margin-right: 35%">
                 <label for="password" class="form-label fw-bold mb-0 mt-3">Password</label>
                 <input class="form-control" type ="password" th:object="${newUser}" th:field="*{pass}" id="password">
                 </div>
@@ -241,6 +255,7 @@
                 <td><h6>First name</h6></td>
                 <td><h6>Last name</h6></td>
                 <td><h6>Email</h6></td>
+                <td><h6>Age</h6></td>
                 <td><h6>Role</h6></td>
               </tr>
               </thead>
@@ -251,6 +266,7 @@
                   <td th:text="${admin.firstName}">firstname1</td>
                   <td th:text="${admin.lastName}">lastname1</td>
                   <td th:text="${admin.email}">email1</td>
+                  <td th:text="${admin.age}">email1</td>
                   <td>
                     <th:block th:each="role : ${admin.roleList.toArray()}">
                       <span th:text="${role.getRoleName()}">role</span>

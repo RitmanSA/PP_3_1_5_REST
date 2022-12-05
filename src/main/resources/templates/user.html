@@ -41,6 +41,7 @@
                   <td><h6>First name</h6></td>
                   <td><h6>Last name</h6></td>
                   <td><h6>Email</h6></td>
+                  <td><h6>Age</h6></td>
                   <td><h6>Role</h6></td>
                 </tr>
                 </thead>
@@ -50,6 +51,7 @@
                     <td th:text="${user.firstName}">firstname1</td>
                     <td th:text="${user.lastName}">lastname1</td>
                     <td th:text="${user.email}">email1</td>
+                    <td th:text="${user.age}">email1</td>
                     <td>
                       <th:block th:each="role : ${user.roleList.toArray()}">
                         <span th:text="${role.getRoleName()}">role</span>
