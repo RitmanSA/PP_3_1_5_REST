@@ -47,16 +47,6 @@ public class TestController {
         return "admin";
     }
 
-    /*
-    @GetMapping("/admin/add")
-    public String newEmptyUser(Model model) {
-        model.addAttribute("rolesArray", roleService.getAllRoles().stream().map(Role::getRoleName).toArray());
-        model.addAttribute("user", new User());
-        return "form";
-    }
-
-     */
-
     @PostMapping("/admin")
     public String newUser(@ModelAttribute("NewUser") User user, @RequestParam("rolesArray") String[] rolesArray) {
         user.setRoleList(Arrays.stream(rolesArray).map(roleService::getByRole).collect(Collectors.toList()));
@@ -70,14 +60,6 @@ public class TestController {
         return "redirect:/admin";
     }
 
-    /*
-    @GetMapping("admin/update/{id}")
-    public String getToUpdate(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("rolesArray", roleService.getAllRoles().stream().map(Role::getRoleName).toArray());
-        model.addAttribute("user", userService.getById(id));
-        return "form";
-    }
-    */
     @PostMapping("/admin/update/{id}")
     public String update(@PathVariable("id") Long id
             , @ModelAttribute("updateUser") User user
@@ -91,5 +73,4 @@ public class TestController {
     public String viewLoginPage() {
         return "login";
     }
-
 }
