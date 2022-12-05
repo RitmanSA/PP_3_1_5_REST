@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,9 +41,13 @@ public class TestController {
         User admin = userService.getByEmail(principal.getName());
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("admin", admin);
+        model.addAttribute("newUser", new User());
+        model.addAttribute("rolesArray", roleService.getAllRoles().stream().map(Role::getRoleName).toArray());
+        model.addAttribute("updateUser", new User());
         return "admin";
     }
 
+    /*
     @GetMapping("/admin/add")
     public String newEmptyUser(Model model) {
         model.addAttribute("rolesArray", roleService.getAllRoles().stream().map(Role::getRoleName).toArray());
@@ -50,8 +55,10 @@ public class TestController {
         return "form";
     }
 
-    @PostMapping("/admin/update")
-    public String newUser(@ModelAttribute("user") User user, @RequestParam("rolesArray") String[] rolesArray) {
+     */
+
+    @PostMapping("/admin")
+    public String newUser(@ModelAttribute("NewUser") User user, @RequestParam("rolesArray") String[] rolesArray) {
         user.setRoleList(Arrays.stream(rolesArray).map(roleService::getByRole).collect(Collectors.toList()));
         userService.addUser(user);
         return "redirect:/admin";
@@ -63,19 +70,26 @@ public class TestController {
         return "redirect:/admin";
     }
 
+    /*
     @GetMapping("admin/update/{id}")
     public String getToUpdate(@PathVariable("id") Long id, Model model) {
         model.addAttribute("rolesArray", roleService.getAllRoles().stream().map(Role::getRoleName).toArray());
         model.addAttribute("user", userService.getById(id));
         return "form";
     }
-
+    */
     @PostMapping("/admin/update/{id}")
     public String update(@PathVariable("id") Long id
-            , @ModelAttribute("user") User user
+            , @ModelAttribute("updateUser") User user
             , @RequestParam("rolesArray") String[] rolesArray) {
         user.setRoleList(Arrays.stream(rolesArray).map(roleService::getByRole).collect(Collectors.toList()));
         userService.changeUser(id, user);
         return "redirect:/admin";
     }
+
+    @GetMapping("/login")
+    public String viewLoginPage() {
+        return "login";
+    }
+
 }
