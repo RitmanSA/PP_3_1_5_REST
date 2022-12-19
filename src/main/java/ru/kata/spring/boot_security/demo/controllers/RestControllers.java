@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.util.List;
 
 @RestController
 @CrossOrigin //for js
@@ -26,7 +24,7 @@ public class RestControllers {
     private final UserService userService;
 
     @Autowired
-    public RestControllers (UserService userService, RoleService roleService) {
+    public RestControllers (UserService userService) {
         this.userService = userService;
     }
 
@@ -36,28 +34,30 @@ public class RestControllers {
     }
 
     @GetMapping("/user")
-    public User getSingleUser(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
-        return userService.getByEmail(user.getUsername());
+    public ResponseEntity<?> getSingleUser(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user) {
+        return new ResponseEntity<>(userService.getByEmail(user.getUsername()), HttpStatus.OK);
     }
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<?> getAllUsers() {
+        return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/users", consumes = {"application/json;charset=UTF-8"})
-    public User addUser(@RequestBody User user) {
+    public ResponseEntity<?> addUser(@RequestBody User user) {
         userService.addUser(user);
-        return user;
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @DeleteMapping(value="/users/{id}")
-    public void deleteUser(@PathVariable("id") Long id) {
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping(value = "users")
-    public void updateUser(@RequestBody User user) {
+    public ResponseEntity<?> updateUser(@RequestBody User user) {
         userService.changeUser(user.getId(), user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }
