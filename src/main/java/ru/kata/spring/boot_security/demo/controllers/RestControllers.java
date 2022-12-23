@@ -18,7 +18,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 
 @RestController
-@CrossOrigin //for js
+@CrossOrigin
 @RequestMapping("/api")
 public class RestControllers {
     private final UserService userService;
@@ -26,11 +26,6 @@ public class RestControllers {
     @Autowired
     public RestControllers (UserService userService) {
         this.userService = userService;
-    }
-
-    @GetMapping("users/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
-        return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
     }
 
     @GetMapping("/user")
