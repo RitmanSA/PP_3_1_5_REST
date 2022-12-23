@@ -16,15 +16,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
-    private UserDetailsService userService;
+    private final UserDetailsService userService;
 
     @Autowired
-    public void setUserService(UserDetailsService userService) {
-        this.userService = userService;
-    }
-
-    public WebSecurityConfig(SuccessUserHandler successUserHandler) {
+    public WebSecurityConfig(SuccessUserHandler successUserHandler, UserDetailsService userService) {
         this.successUserHandler = successUserHandler;
+        this.userService = userService;
     }
 
     @Override
